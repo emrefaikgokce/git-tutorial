@@ -1,3 +1,0 @@
-/home/emrefaikgokce/Programming/Git/git-tutorial/build/CMakeFiles/rebuild_cache.dir
-/home/emrefaikgokce/Programming/Git/git-tutorial/build/CMakeFiles/foo.dir
-/home/emrefaikgokce/Programming/Git/git-tutorial/build/CMakeFiles/edit_cache.dir
