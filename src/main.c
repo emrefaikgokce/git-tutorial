@@ -12,6 +12,7 @@ int main ()
 {
 
 	printf("Hello ESPL\n");	
+	printf("A difference\n");
 
 	return 0;
 }			

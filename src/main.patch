@@ -1,0 +1,12 @@
+diff --git a/src/main.c b/src/main.c
+index f73c3a5..a66b7d4 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -12,6 +12,7 @@ int main ()
+ {
+ 
+ 	printf("Hello ESPL\n");	
++	printf("A difference\n");
+ 
+ 	return 0;
+ }			
