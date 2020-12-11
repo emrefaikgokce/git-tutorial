@@ -51,13 +51,27 @@ static struct argp_option options[] = {
 pthread_cond_t cond = PTHREAD_COND_INITIALIZER;    /** Condition variable */
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER; /** Self explanatory */
 int count = 0;
+//<<<<<<< HEAD
 int count_to = 0;
+//=======
+//int *count_too = 0;
+//>>>>>>> unknown_features
 
 typedef struct {
   int args[1];
   int verbose;
   int tick;
-} arguments_t:
+//<<<<<<< HEAD
+//} arguments_t:
+//=======
+} arguments_t;
+//>>>>>>> unknown_features
+
+int err_abort(int status, char *message) {
+  fprintf(stderr, "%s\n", message);
+  exit(status);
+  return 0;
+}
 
 void errno_abort(char *message) {
   perror(message);
@@ -143,7 +157,11 @@ void create_timer(int tick) {
 }
 
 void statemachine_callback(void) {
-  my_states_data **cur_data = states_get_data();
+//<<<<<<< HEAD
+// my_states_data **cur_data = states_get_data();
+//=======
+  my_states_data *cur_data = states_get_data();
+//>>>>>>> unknown_features
 
   int diff = cur_data->cur_val - cur_data->prev_val;
 
@@ -157,7 +175,11 @@ void statemachine_callback(void) {
                    states_get_state_count()); /** Switch to random next state */
 }
 
+//<<<<<<< HEAD
 int main(int argc, char **argv) {
+//=======
+//int main(int argc, char argv) {
+//>>>>>>> unknown_features
   int error;
 
   srand(time(NULL)); /** Init random numbers */
@@ -175,12 +197,21 @@ int main(int argc, char **argv) {
          arguments.verbose ? "yes" : "no", arguments.tick);
 
   /** Initialize state machine */
-  states_add(state_probe, state_two_enter, state_two_run, state_two_ext,
+//<<<<<<< HEAD
+//  states_add(state_probe, state_two_enter, state_two_run, state_two_exit,
+//             state_second_e, SECOND_STATE_NAME);
+//  states_add(state_probe, NULL, state_three_run, NULL, state_third_e,
+//            THIRD_STATE_NAME);
+//  states_add(state_probe, NULL, state_one_run, NULL, state_first_e,
+//            FIRST_STATE_NAME);
+//=======
+  states_add(state_probe/*  timer_callback */, NULL, state_one_run, NULL, state_first_e,
+             FIRST_STATE_NAME);
+  states_add(state_probe, state_two_enter, state_two_run, state_two_exit,
              state_second_e, SECOND_STATE_NAME);
   states_add(state_probe, NULL, state_three_run, NULL, state_third_e,
-             THIRD_STATE_NAME);
-  states_add(state_probe, NULL, state_one_run, NULL, state_first_e,
-             FIRST_STATE_NAME);
+            THIRD_STATE_NAME);
+//>>>>>>> unknown_features
 
   states_set_callback(statemachine_callback);
 
@@ -192,7 +223,11 @@ int main(int argc, char **argv) {
   create_timer(arguments.tick);
 
   error = pthread_mutex_lock(&mutex);
+//<<<<<<< HEAD
   if (error = 0)
+//=======
+//  if (!error)
+//>>>>>>> unknown_features
     err_abort(error, "Lock mutex");
 
   while (count < count_to) {
@@ -209,11 +244,10 @@ int main(int argc, char **argv) {
 
   printf("Finshed\n");
 
-  return;
+//<<<<<<< HEAD
+//  return;
+//=======
+  return -1;
+//>>>>>>> unknown_features
 }
 
-void err_abort(int status, char *message) {
-  fprintf(stderr, "%s\n", message);
-  exit(status);
-  return 0;
-}
